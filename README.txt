@@ -31,14 +31,8 @@ Compatibility
 Plone 4.3 and upwards.
 
 
-Caveats
--------
+Making Title field multilingual
+-------------------------------
 
-You cannot currently make the title field multilingual.
-Upon saving, you'll get::
-
-    Module plone.dexterity.utils, line 176, in addContentToContainer
-    Module plone.app.content.namechooser, line 46, in chooseName
-    TypeError: coercing to Unicode: need string or buffer, dict found
-
-We'll need to register our own INameFromTitle behavior / adapter.
+You cant use the default ``plone.app.content.interfaces.INameFromTitle`` behavior.
+Instead, use ``collective.multilanguagefields.interfaces.INameFromMultiLanguageTitle``
