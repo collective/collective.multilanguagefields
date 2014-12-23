@@ -18,6 +18,7 @@
       factory=".behaviors.NameFromMultiLanguageTitle"
       />
 
+  <adapter factory=".fields.MultiLanguageDataManager" />
 
   <genericsetup:registerProfile
       name="default"
