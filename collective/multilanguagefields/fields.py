@@ -1,9 +1,9 @@
 from AccessControl import ClassSecurityInfo
 from Products.CMFCore.utils import getToolByName
 #from z3c.form.widget import MultiWidget
-from zope.component.hooks import getSite
-from zope import schema
 from collective.multilanguagefields import MessageFactory as _
+from zope import schema
+from zope.component.hooks import getSite
 
 
 class MultilanguageField(object):
