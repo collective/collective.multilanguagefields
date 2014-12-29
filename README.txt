@@ -1,7 +1,7 @@
 Introduction
 ============
 
-.. Experimental::
+.. Caution::
 
   This package is still in a public experimentation phase. 
   
