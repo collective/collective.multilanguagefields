@@ -1,11 +1,19 @@
-from collective.multilanguagefields.interfaces import \
-    INameFromMultiLanguageTitle
-#from plone.app.content.interfaces import INameFromTitle
-from zope.interface import implements
+from plone.dexterity.interfaces import IDexterityContent
+from zope.interface import implements, Interface
 
 
-class INameFromMultiLanguageTitle(object):
-    implements(INameFromMultiLanguageTitle)
+class IHasMultiLanguageFields(IDexterityContent):
+    """Marker interface for multilanguage fields behavior
+    """
+
+
+class INameFromTitle(Interface):
+    """Marker interface
+    """
+
+
+class NameFromMultiLanguageTitle(object):
+    implements(INameFromTitle)
 
     def __init__(self, context):
         self.context = context
