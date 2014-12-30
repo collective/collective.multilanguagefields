@@ -1,21 +1,22 @@
 from Products.CMFCore.utils import getToolByName
 
 
-def ml_field(context, fieldname):
-    """Retrieve a single field value for the current language
+def ml_value(context, fieldname, default=None):
+    """Retrieve a field value for the current language
     """
-    values = getattr(context, fieldname, None)
-    if not values:
-        return ''
+    values = getattr(context, fieldname)
+    if not values and default is not None:
+        return default
     ltool = getToolByName(context, 'portal_languages')
     default_language = ltool.getDefaultLanguage()
     # use request language or site default language
     language = context.REQUEST.get('LANGUAGE', default_language)
-    value = values.get(language, '')
-    if not value:
-        # return site default language
-        value = values.get(default_language)
-        if not value:
-            # return random language
-            value = values.values()[0]
-    return value
+    value = values.get(language, values.get(default_language, None))
+    if value is not None:
+        return value
+    if default is not None:
+        return default
+    message = "No translation available for fieldname %s in language %s " \
+              "nor in default language %s. (%r)"
+    raise ValueError(
+        message % (fieldname, language, default_language, context))

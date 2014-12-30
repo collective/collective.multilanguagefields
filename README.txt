@@ -3,9 +3,9 @@ Introduction
 
 .. Caution::
 
-  This package is still in a public experimentation phase. 
-  
-  
+  This package is still in a public experimentation phase.
+
+
 This package aims to provide a simple way to make some fields on a dexterity
 content type multilingual.
 It tries to do what raptus.multilanguagefields does for Archetypes content
@@ -47,4 +47,18 @@ Instead, use ``collective.multilanguagefields.interfaces.INameFromMultiLanguageT
 
 In addition, your content type needs to implement its own ``Title()`` method
 which takes into account that the title attribute conatins a dictionary.
-The ``ml_field`` method from ``utils.py`` might be helpful.
+The ``ml_value`` method from ``utils.py`` might be helpful.
+
+
+Using multilanguage fields in templates
+---------------------------------------
+
+You can do this as follows::
+
+    <span tal:content="context/ml_value/my_field" />
+
+You can also specify a default value:
+
+    <span tal:define="ml_value context/ml_value"
+          tal:content="python: ml_value('my_field', 'no translation found')" />
+
