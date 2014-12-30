@@ -1,6 +1,11 @@
 Introduction
 ============
 
+.. Caution::
+
+  This package is still in a public experimentation phase. 
+  
+  
 This package aims to provide a simple way to make some fields on a dexterity
 content type multilingual.
 It tries to do what raptus.multilanguagefields does for Archetypes content
