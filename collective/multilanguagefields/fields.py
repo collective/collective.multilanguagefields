@@ -33,21 +33,26 @@ class MultiLanguageDataManager(AttributeField):
         self.attribute_name = "%s%s" % (ML_PREFIX, self.field.__name__)
 
     def get(self):
-        value = ''
-        values = getattr(self.adapted_context, self.attribute_name, '')
-        if values:
-            default_language = self.ltool.getDefaultLanguage()
-            # use request language or site default language
-            language = self.context.REQUEST.get('LANGUAGE',
-                                                default_language)
-            value = values.get(language, '')
-            if not value:
-                # return site default language
-                value = values.get(default_language)
-                if not value:
-                    # return random language
-                    value = values.values()[0]
-        return value
+        values = getattr(self.adapted_context, self.attribute_name)
+        return_value = ''
+        # if we are rendering the widget, we should return the whole dictionary
+        edit_mode = self.context.REQUEST.getURL().endswith('@@edit')
+        if edit_mode:
+            return_value = values
+        else:
+            if values:
+                default_language = self.ltool.getDefaultLanguage()
+                # use request language or site default language
+                language = self.context.REQUEST.get('LANGUAGE',
+                                                    default_language)
+                return_value = values.get(language, '')
+                if not return_value:
+                    # return site default language
+                    return_value = values.get(default_language)
+                    if not return_value:
+                        # return random language
+                        return_value = values.values()[0]
+        return return_value
 
     def set(self, value):
         setattr(self.adapted_context, self.attribute_name, value)
