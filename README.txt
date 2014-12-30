@@ -42,3 +42,4 @@ Instead, use ``collective.multilanguagefields.interfaces.INameFromMultiLanguageT
 
 In addition, your content type needs to implement its own ``Title()`` method
 which takes into account that the title attribute conatins a dictionary.
+The ``ml_field`` method from ``utils.py`` might be helpful.
