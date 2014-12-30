@@ -20,23 +20,17 @@ class MultiLanguageTextLine(schema.Dict):
 
 class MultiLanguageDataManager(AttributeField):
 
-    """Custom DataManager to store field value in dictionary with prefix
+    """Custom DataManager to store field value as dictionary
     """
 
     adapts(Interface, MultiLanguageTextLine)
 
-    def __init__(self, context, field):
-        """Set attribute name.
-        """
-        super(MultiLanguageDataManager, self).__init__(context, field)
-        ML_PREFIX = '_ml_'  # prefix for attribute to store dictionary in
-        self.attribute_name = "%s%s" % (ML_PREFIX, self.field.__name__)
-
     def get(self):
-        values = getattr(self.adapted_context, self.attribute_name)
+        values = getattr(self.adapted_context, self.field.__name__)
         return_value = ''
         # if we are rendering the widget, we should return the whole dictionary
-        edit_mode = self.context.REQUEST.getURL().endswith('@@edit')
+        url = self.context.REQUEST.getURL()
+        edit_mode = url.endswith('/@@edit') or url.endswith('/edit')
         if edit_mode:
             return_value = values
         else:
@@ -53,6 +47,3 @@ class MultiLanguageDataManager(AttributeField):
                         # return random language
                         return_value = values.values()[0]
         return return_value
-
-    def set(self, value):
-        setattr(self.adapted_context, self.attribute_name, value)
