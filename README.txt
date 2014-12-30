@@ -7,7 +7,7 @@ Introduction
 
 
 This package aims to provide a simple way to make some fields on a dexterity
-content type multilingual.
+content type available in more than one language ("multilanguage").
 It tries to do what raptus.multilanguagefields does for Archetypes content
 types.
 
@@ -15,7 +15,7 @@ types.
 Usage
 -----
 
-Multilingual text line::
+Multilanguage text line::
 
     from collective.multilanguagefields.fields import TextLine as MLTextLine
     from plone.supermodel import model
@@ -38,8 +38,8 @@ Compatibility
 Plone 4.3 and upwards.
 
 
-Making Title field multilingual
--------------------------------
+Making Title field multilanguage
+--------------------------------
 
 You cant use the default ``plone.app.content.interfaces.INameFromTitle``
 behavior.
