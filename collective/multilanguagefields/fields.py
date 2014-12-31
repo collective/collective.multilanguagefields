@@ -17,6 +17,7 @@ class MultiLanguageTextLine(schema.Dict):
         self.key_type = language_choice
         self.value_type = schema.TextLine(
             title=kw.get('title'),
+            required=kw.get('required'),
         )
 
 
@@ -28,6 +29,7 @@ class MultiLanguageText(schema.Dict):
         self.value_type = schema.Text(
             title=kw.get('title'),
             max_length=kw.get('max_length'),
+            required=kw.get('required'),
         )
 
 
