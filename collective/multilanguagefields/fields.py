@@ -27,6 +27,7 @@ class MultiLanguageText(schema.Dict):
         self.key_type = language_choice
         self.value_type = schema.Text(
             title=kw.get('title'),
+            max_length=kw.get('max_length'),
         )
 
 
