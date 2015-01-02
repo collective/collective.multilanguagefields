@@ -41,7 +41,7 @@
             // remove existing fields
             $('.multi-widget-field').remove();
             // remove unused fields
-            $('.multi-widget select, .multi-widget label, br').remove();
+            $('.multi-widget select, .multi-widget label, br').hide();
             // remove unused buttons
             $('.multi-widget-buttons').remove();
             // remove remove checkbox
