@@ -17,7 +17,7 @@ Assumptions
 
 * It should be possible for a site to add a new supported language without
   having to migrate content.
-  (A modification in the code for your customer-specific would be ok.)
+  (A modification in the code for your customer-specific package would be ok.)
 
 
 Usage
@@ -54,7 +54,7 @@ behavior.
 Instead, use ``collective.multilanguagefields.interfaces.INameFromMultiLanguageTitle``
 
 In addition, your content type needs to implement its own ``Title()`` method
-which takes into account that the title attribute conatins a dictionary.
+which takes into account that the title attribute contains a dictionary.
 The ``ml_value`` method from ``utils.py`` might be helpful.
 
 
