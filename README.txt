@@ -61,16 +61,3 @@ You can also specify a default value:
 
     <span tal:define="ml_value context/ml_value"
           tal:content="python: ml_value('my_field', 'no translation found')" />
-
-
-Initializing with default languages
------------------------------------
-
-By default, for a new item, no languages wil be shown.
-To define the languages that should be shown, set the default value as follows::
-
-    title = MultiLanguageTextLine(
-        title=_(u"Title"),
-        required=False,
-        default={u'en': u'', u'de': u'', u'nl': u''},
-    )

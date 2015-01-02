@@ -26,6 +26,7 @@ setup(name='collective.multilanguagefields',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
+          'ordereddict',
       ],
       entry_points="""
       # -*- Entry points: -*-
