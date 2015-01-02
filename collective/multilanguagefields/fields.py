@@ -1,8 +1,8 @@
 from Products.CMFPlone.utils import getToolByName
 from collective.multilanguagefields import MessageFactory as _
 from z3c import form
-from zope.component import adapts
 from zope import schema
+from zope.component import adapts
 
 language_choice = schema.Choice(
     title=_(u"Language"),
@@ -19,6 +19,9 @@ class MultiLanguageTextLine(schema.Dict):
             title=kw.get('title'),
             required=kw.get('required'),
         )
+        self.key_type._init_field = True
+        self.default = kw.get('default', {})
+        self.key_type._init_field = False
 
 
 class MultiLanguageText(schema.Dict):
