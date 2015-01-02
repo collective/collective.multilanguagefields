@@ -12,6 +12,14 @@ It tries to do what raptus.multilanguagefields does for Archetypes content
 types.
 
 
+Assumptions
+-----------
+
+* It should be possible for a site to add a new supported language without
+  having to migrate content.
+  (A modification in the code for your customer-specific would be ok.)
+
+
 Usage
 -----
 
@@ -57,7 +65,7 @@ You can do this as follows::
 
     <span tal:content="context/ml_value/my_field" />
 
-You can also specify a default value:
+You can also specify a default value::
 
     <span tal:define="ml_value context/ml_value"
           tal:content="python: ml_value('my_field', 'no translation found')" />
