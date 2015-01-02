@@ -1,6 +1,7 @@
 from Products.CMFPlone.utils import getToolByName
 from collective.multilanguagefields import MessageFactory as _
-from z3c import form
+from z3c.form.converter import DictMultiConverter
+from z3c.form.widget import MultiWidget
 from zope import schema
 from zope.component import adapts
 from zope.schema.interfaces import IContextAwareDefaultFactory
@@ -48,10 +49,10 @@ class MultiLanguageText(schema.Dict):
         )
 
 
-class MultiLanguageTextFieldDataConverter(form.converter.DictMultiConverter):
+class MultiLanguageTextFieldDataConverter(DictMultiConverter):
     """A data converter that fills the dictionary with a key for each language
     """
-    adapts(schema.interfaces.IDict, form.widget.MultiWidget)
+    adapts(schema.interfaces.IDict, MultiWidget)
 
     def toWidgetValue(self, value):
         """Include items for each language in the site.
