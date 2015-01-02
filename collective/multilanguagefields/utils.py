@@ -14,6 +14,10 @@ def ml_value(context, fieldname, default=None):
     value = values.get(language, values.get(default_language, None))
     if value is not None:
         return value
+    # fall back to default language if preferred langiage is unavailable
+    value = values.get(default_language, None)
+    if value is not None:
+        return value
     if default is not None:
         return default
     message = "No translation available for fieldname %s in language %s " \
