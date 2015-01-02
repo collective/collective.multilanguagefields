@@ -7,6 +7,12 @@ from zope.component import adapts
 from zope.schema.interfaces import IContextAwareDefaultFactory
 from zope.interface import provider
 from ordereddict import OrderedDict
+from zope.schema._bootstrapinterfaces import RequiredMissing
+from zope.schema.interfaces import ValidationError
+
+
+class DefaultLanguageMissing(RequiredMissing):
+    __doc__ = _("""Default site entry language missing (first item)""")
 
 
 @provider(IContextAwareDefaultFactory)
@@ -31,8 +37,27 @@ class MultiLanguageTextLine(schema.Dict):
         self.key_type = language_choice
         self.value_type = schema.TextLine(
             title=kw.get('title'),
-            required=kw.get('required'),
+            required=kw.get('required', False),
         )
+
+    def validate(self, value):
+        request = self.context.REQUEST
+        if request.method == 'GET':
+            return
+        super(MultiLanguageTextLine, self).validate(value)
+
+        ltool = getToolByName(self.context, 'portal_languages')
+        default_lang = ltool.getDefaultLanguage()
+
+        for key, item in value.items():
+            try:
+                old_required = self.value_type.required
+                self.value_type.required = key == default_lang
+                self.value_type.validate(item)
+            except ValidationError:
+                raise DefaultLanguageMissing(self.__name__)
+            finally:
+                self.value_type.required = old_required
 
 
 class MultiLanguageText(schema.Dict):
