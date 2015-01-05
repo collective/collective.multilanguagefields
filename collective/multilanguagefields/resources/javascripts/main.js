@@ -3,27 +3,30 @@
 
         $(document).ready(function() {
 
-            var field_ids = [], field_names = [];
-            var dt = '', dd = '';
+            $( ".multi-widget" ).each(function( index ) {
+                var field_ids = [], field_names = [];
+                var dt = '', dd = '';
 
-            // loop over currect languagefields
-            $( ".multi-widget-field" ).each(function( index ) {
-              field_ids.push($( this ).attr('id'));
-              field_names.push($( this ).find(":selected").text());
+                // loop over currect languagefields
+                $(this).find( ".multi-widget-field" ).each(function( index ) {
+                  field_ids.push($( this ).attr('id'));
+                  field_names.push($( this ).find(":selected").text());
+                });
+                console.log(field_ids);
+                console.log(this);
+                // make header
+                $(field_ids).each(function( index, value) {
+                    dt += '<dt id="fieldsetlegend-' + value +'">' + field_names[index] + '</dt>';
+                });
+                // copy over html for content
+                $(field_ids).each(function( index, value) {
+                    dd += '<dd id="fieldset-' + value +'"> '+ $('#'+value).html() +' </dd>';
+                });
+                // put it all together
+                $(this).prepend(
+                    '<dl class="enableFormTabbing multilingualtabbing">' + dt + dd + '</dl>'
+                );
             });
-            // make header
-            $(field_ids).each(function( index, value) {
-                dt += '<dt id="fieldsetlegend-' + value +'">' + field_names[index] + '</dt>';
-            });
-            // copy over html for content
-            $(field_ids).each(function( index, value) {
-                dd += '<dd id="fieldset-' + value +'"> '+ $('#'+value).html() +' </dd>';
-            });
-            // put it all together
-            $('.multi-widget').prepend(
-                '<dl class="enableFormTabbing multilingualtabbing">' + dt + dd + '</dl>'
-            );
-
             // enable tabbing
             $('body').each(function() {
                 var item = $(this);
