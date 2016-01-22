@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.7 (unreleased)
+0.7 (2016-01-22)
 ----------------
 
 - Don't raise DefaultLanguageMissing when field is not required and no other values are given.
