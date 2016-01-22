@@ -4,7 +4,8 @@ Changelog
 0.7 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Don't raise DefaultLanguageMissing when field is not required and no other values are given.
+	[moverkamp]
 
 
 0.6 (2015-01-05)
