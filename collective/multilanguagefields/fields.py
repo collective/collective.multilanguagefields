@@ -49,15 +49,18 @@ class MultiLanguageTextLine(schema.Dict):
         ltool = getToolByName(self.context, 'portal_languages')
         default_lang = ltool.getDefaultLanguage()
 
-        for key, item in value.items():
-            try:
-                old_required = self.value_type.required
-                self.value_type.required = key == default_lang
-                self.value_type.validate(item)
-            except ValidationError:
-                raise DefaultLanguageMissing(self.__name__)
-            finally:
-                self.value_type.required = old_required
+        # check if default language value is given only if
+        # there are values given
+        if any(value.values()):
+            for key, item in value.items():
+                try:
+                    old_required = self.value_type.required
+                    self.value_type.required = key == default_lang
+                    self.value_type.validate(item)
+                except ValidationError:
+                    raise DefaultLanguageMissing(self.__name__)
+                finally:
+                    self.value_type.required = old_required
 
 
 class MultiLanguageText(schema.Dict):
